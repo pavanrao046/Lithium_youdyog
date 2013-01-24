@@ -4,7 +4,7 @@
 echo "<table class='table-striped' style='width : 100%;text-align : left;'>";
 echo "<tr> <th> Name </th> <th> Groups </th> <th style='text-align : right;'> Add to group </th> </tr>";
 foreach($userCursor as $friends)
-	echo "<script> console.log('".$userCursor['name']."') </script>";
+	//echo "<script> console.log('".$userCursor['name']."') </script>";
 	foreach($friends as $friend)
 	{
 		echo "<tr><td>";

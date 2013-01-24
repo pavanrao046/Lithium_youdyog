@@ -56,16 +56,16 @@ class ConnectionsController extends \lithium\action\Controller {
 			$data['visibility'] = "public";
 			$result = Groups::addGroup($data);
 			if($result)
-				$this->redirect('Connections::getGroups');
+				$this->redirect('Connections::getPrivateGroups');
 			else
 				return '0';	
 		}
 		
 		/* for retrieving groups of logged in user */
-		public function getGroups(){
+		public function getPrivateGroups(){
 			$myId = "50f69176904e1d66affec20d";
 			$groupList = array();
-			$options = array('conditions' => array('owner' => $myId),'fields' => array('group_name'));
+			$options = array('conditions' => array('owner' => $myId,'visibility' => 'private'),'fields' => array('group_name'));
 			$groups = Groups::getGroups('all',$options);
 			foreach($groups as $group)
 			{
@@ -148,10 +148,48 @@ class ConnectionsController extends \lithium\action\Controller {
 		
 		/* for searching a group */			
 		public function searchGroup(){
+			$myId = "50f69176904e1d66affec20d";		
 			$searchName = $_POST['group_name'];	
+			$groupList = array();
+			$isMember = '0';
 			$regexObj = new \MongoRegex("/^$searchName/i");				
-			$users = Groups::getGroups('all',array('conditions' => array('group_name' => $regexObj)));
-			return compact('users');
+			$groups = Groups::getGroups('all',array('conditions' => array('group_name' => $regexObj,'visibility' => 'public')));
+			foreach($groups as $group)
+			{			foreach($group['users'] as $user){
+							if($user['id'] == $myId){
+								$isMember = '1';
+								break;
+							}
+						}	
+						array_push($groupList, array('group_name' => $group['group_name'], 'id' => $group['_id'],'users' => $group['users'],'isMember' => $isMember));
+						$isMember = '0';
+			}
+			return json_encode($groupList);		
+		}
+		
+		/* for retrieving all the groups pertaining to logged in user */
+		public function userGroups(){
+			$myId = "50f69176904e1d66affec20d";
+			$groupList = array();
+			$isOwner = '0';
+			$groups = Groups::getGroups('all',array('conditions' => array('$or' =>array(array('owner' => $myId),array('users.id' => $myId))),'fields' => array('group_name','_id','owner','users.id','visibility')));
+			return compact('groups');
+		}
+		
+		/* for deleting a group */
+		public function deleteGroup(){
+			$myId = "50f69176904e1d66affec20d";
+			$groupId = $_POST['groupId'];
+			$mongoId = new \MongoId($groupId);
+			$result = Groups::deleteGroup(array('_id' => $mongoId));
+			if($result)
+			{
+				return '1';
+			}
+			else
+			{
+				return '0';
+			}
 		}
 }
 

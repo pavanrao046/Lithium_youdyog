@@ -19,5 +19,10 @@ class Groups extends \lithium\data\Model {
 		return $result;
 	}
 	
+	public function deleteGroup($condition){
+		$result = Groups::remove($condition);
+		return $result;
+	}
+	
 }
 ?>

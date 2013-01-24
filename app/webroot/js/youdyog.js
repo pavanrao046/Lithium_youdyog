@@ -40,7 +40,7 @@ $(document).ready(function(){
 		
 		// load all groups when groups button is ready
 		$('.btnAction').ready(function(){				
-			$.post('/getGroups',{},function(data){
+			$.post('/getPrivateGroups',{},function(data){
 				var newdata = jQuery.parseJSON(data);
 				for(var i=0;i<newdata.length;i++){
 					$('.groups').append("<li> <a href='#' id='"+newdata[i]+"' class='groupItem'>"+newdata[i]+"</a> </li>");
@@ -86,7 +86,7 @@ $(document).ready(function(){
 		});
 		
 		// add user to a public group
-		$('.btnJoinPublicGroup').click(function(){
+		$('#groupsList').on('click', '.btnJoinPublicGroup', function(){
 			$.post('/addUserToPublicGroup', {groupId: $(this).attr('id')}, function(data){
 				location.reload();
 			});
@@ -94,7 +94,7 @@ $(document).ready(function(){
 		});
 		
 		// remove user from public group
-		$('.btnUnjoinPublicGroup').click(function(){
+		$('#groupsList').on('click', '.btnUnjoinPublicGroup', function(){
 			$.post('/removeUserFromPublicGroup', {groupId: $(this).attr('id')}, function(data){
 				location.reload();
 			});
@@ -102,7 +102,7 @@ $(document).ready(function(){
 		});
 		
 		//get members of a public group
-		$('.publicGroup').click(function(){
+		$('#groupsList').on('click', '.publicGroup',function(){
 			var id = $(this).attr('id');
 			var groupName = $(this).attr('data-name');
 			$.post('/getMembers',{groupId : id}, function(data){
@@ -115,7 +115,61 @@ $(document).ready(function(){
 			return false;
 		});
 		
+		// get the searched groups 
+		$('#txtSearchGroup').submit(function(){
+			var groupName = $(this).val();
+			alert(groupName);
+			$.post('/searchGroup',{group_name : groupName}, function(data){
+				console.log(data);
+			});
+			return false;
+		});		
+		$('#btnSearchGroup').click(function(){
+			var groupName = $('#txtSearchGroup').val();
+			$.post('/searchGroup',{group_name : groupName}, function(data){
+				var newdata = jQuery.parseJSON(data);
+				console.log(newdata.length);
+				$('#groupsList').html('');
+				$('#groupLegend').html('<a href="/getPublicGroups" onclick=""> Groups </a> | Search Results for "'+groupName+'"');
+				if(newdata.length == 0)
+				{
+					$('#groupsList').append('<h5><span style="color:#6F6F6F;">No matching groups.</span><h5>');
+				}
+				else{
+					for(var i=0;i<newdata.length;i++)
+					{
+						$('#groupsList').append('<div class="listDiv"> <a class="publicGroup" data-name="'+newdata[i]['group_name']+'" href="" id="'+newdata[i]['id']['$id']+'">'+newdata[i]['group_name']+'</a>');
+						if(newdata[i]['isMember'] == "1"){
+							$('#groupsList').append("<button class='btn btn-success pull-right btnUnjoinPublicGroup' style='margin-top : -50px;' id='"+newdata[i]['id']['$id']+"'> UnJoin </button></div>");					
+						}
+						else{
+							$('#groupsList').append("<button class='btn btn-success pull-right btnJoinPublicGroup' style='margin-top : -50px;' id='"+newdata[i]['id']['$id']+"'> Join </button></div>");
+						}					
+					}
+				}
+			});
+			return false;
+		});
 		
+		// delete a group
+		$('#groupsList').on('click','.btnDeleteGroup',function(){
+			var groupId = $(this).attr('id');
+			$.post('/deleteGroup',{groupId : groupId},function(data){
+				console.log(data);
+				if(data == '0')
+				{
+					$('#myGroupsAlert').attr('class','alert alert-danger');
+					$('#myGroupsAlert').css('display','block');
+					$('#myGroupsAlert').html('<strong> Oops! </strong> Something terribly went wrong. Please try after sometime.');
+					$('#myGroupsAlert').hide().fadeIn(300);
+				}
+				else
+				{
+					location.reload();
+				}
+			}); 
+			return false;
+		});
 		
 		// get assigned groups for users
 		/*

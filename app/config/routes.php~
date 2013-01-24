@@ -60,12 +60,14 @@ Router::connect('/search','Connections::search');
 Router::connect('/connect','Connections::connect');
 Router::connect('/connections','Connections::getConnections');
 Router::connect('/addGroup','Connections::addGroup');
-Router::connect('/getGroups', 'Connections::getGroups');
+Router::connect('/getPrivateGroups', 'Connections::getPrivateGroups');
 Router::connect('/getPublicGroups', 'Connections::getPublicGroups');
 Router::connect('/addUserToPublicGroup', 'Connections::addUserToPublicGroup');
 Router::connect('/removeUserFromPublicGroup', 'Connections::removeUserFromPublicGroup');
 Router::connect('/getMembers', 'Connections::getMembers');
-
+Router::connect('/searchGroup', 'Connections::searchGroup');
+Router::connect('/myGroups', 'Connections::userGroups');
+Router::connect('/deleteGroup', 'Connections::deleteGroup');
 
 
 /**

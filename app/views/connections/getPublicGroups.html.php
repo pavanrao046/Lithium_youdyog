@@ -2,7 +2,7 @@
 	<legend> <span id="groupLegend">Groups</span> 
 		<form class="form-search pull-right">
   			<div class="input-append">
-    				<input type="text" id="txtSearchGroup" class="span2 search-query" data-provide="typeahead" placeholder="Search Groups" >
+    				<input type="text" id="txtSearchGroup" class="span2 search-query" data-provide="typeahead" placeholder="Search Public Groups" >
     				<button class="btn" id="btnSearchGroup">Search</button>
   			</div>
   			

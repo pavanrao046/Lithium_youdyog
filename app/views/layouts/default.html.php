@@ -31,10 +31,10 @@
                       <li id="aboutNav" class="navItem"><a href="#">About</a></li>
                       <li id="friendsNav" class="navItem"><a href="/connections">Friends</a></li>
                       <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Profile <b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Profile <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                          <li id="exploreGroupsNav" class="navItem"><a href="/getPublicGroups">Explore Groups</a></li>
-                          <li><a href="#">Another action</a></li>
+                          <li id="exploreGroupsNav"><a href="/getPublicGroups">Explore Groups</a></li>
+                          <li id="myGroupsNav"><a href="/myGroups">My Groups</a></li>
                           <li><a href="#">Something else here</a></li>
                           <li class="divider"></li>
                           <li class="nav-header">Nav header</li>
