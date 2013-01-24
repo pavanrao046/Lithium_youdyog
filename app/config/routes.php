@@ -42,6 +42,32 @@ if ($locales = Environment::get('locales')) {
  */
 Router::connect('/', 'Pages::view');
 
+
+// routes for search connections
+/*
+Router::connect('/connect','Connections::search');
+Router::connect('/connect/connections','Connections::connections');
+Router::connect('/connect/auth','Connections::connect');
+Router::connect('/connect/connections/createGroup','Connections::creategroup');
+Router::connect('/connect/connections/getGroups','Connections::getGroups');
+Router::connect('/connect/connections/addUserToGroup', 'Connections::addUserToGroup');
+Router::connect('/connect/connections/getUserGroups', 'Connections::getUserGroups');
+*/
+
+// routes for Groups
+
+Router::connect('/search','Connections::search');
+Router::connect('/connect','Connections::connect');
+Router::connect('/connections','Connections::getConnections');
+Router::connect('/addGroup','Connections::addGroup');
+Router::connect('/getGroups', 'Connections::getGroups');
+Router::connect('/getPublicGroups', 'Connections::getPublicGroups');
+Router::connect('/addUserToPublicGroup', 'Connections::addUserToPublicGroup');
+Router::connect('/removeUserFromPublicGroup', 'Connections::removeUserFromPublicGroup');
+Router::connect('/getMembers', 'Connections::getMembers');
+Router::connect('/searchGroup', 'Connections::searchGroup');
+
+
 /**
  * Connect the rest of `PagesController`'s URLs. This will route URLs like `/pages/about` to
  * `PagesController`, rendering `/views/pages/about.html.php` as a static page.
