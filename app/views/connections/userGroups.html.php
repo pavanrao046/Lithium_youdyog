@@ -21,7 +21,7 @@
 			echo "<a id='".$group['_id']."' href='' class='publicGroup' data-name='".$group['group_name']."'>".$group['group_name']."</a>";
 			if($group['owner'] == '50f69176904e1d66affec20d')
 			{
-				echo "<span class='label label-inverse' style='margin-left : 30px;'> Owner </span>";
+				echo "<span class='label' style='margin-left : 30px;'> Owner </span>";
 				echo "<button class='btn pull-right btnDeleteGroup' title='Delete' style='margin-left : 30px;' id='".$group['_id']."'> <i class='icon-trash'> </i> </button>"; 
 				echo "<button class='btn pull-right btnEditGroup' title='Edit' style='margin-left : 30px;' id='".$group['_id']."'> <i class='icon-edit'> </i></button>"; 
 				
@@ -32,11 +32,11 @@
 			
 			if($group['visibility'] == "public")
 			{
-				echo "<span class='label label-success' style='margin-left : 30px;'> Public </span>";
+				echo "<span class='label ' style='margin-left : 30px;'> Public </span>";
 			}
 			else if($group['visibility'] == "private")
 			{
-				echo "<span class='label label-important' style='margin-left : 30px;'> Private </span>";
+				echo "<span class='label' style='margin-left : 30px;'> Private </span>";
 			}
 			else
 			{
