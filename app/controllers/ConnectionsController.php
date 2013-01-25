@@ -11,22 +11,34 @@ class ConnectionsController extends \lithium\action\Controller {
 		
 		/* for searching the user */
 		public function search(){
-			$reqData = $this->request->data;
-			$searchName = $reqData['name'];	
+			$searchName = $_POST['searchName'];
+			$usersList = array();
 			$regexObj = new \MongoRegex("/^$searchName/i");				
-			$users = Users::getUsers('all',array('conditions' => array('name' => $regexObj)));
-			return compact('users');
+			$users = Users::getUsers('all',array('conditions' => array('first_name' => $regexObj), 'fields' => array('first_name','_id','email')));
+			$friendUsers = Users::getUsers('all',array('conditions' => array('_id' => new \MongoId($_SESSION['loggedInUser'])),'fields' => array('connections')));
+			foreach($users as $user){
+				$isFriend = '0';
+					foreach($friendUsers[0]['connections'] as $friend){
+						if($friend['id'] == $user['_id'])
+						{
+							$isFriend = '1';
+							break;
+						}
+					}				
+				array_push($usersList,array('name' => $user['first_name'], 'id' => $user['_id'], 'email' => $user['email'], 'isFriend' => $isFriend));	
+			}
+			return json_encode($usersList);
 		}
 		
 		/* for connecting to a user */
 		public function connect(){
 			
 			$id = $_POST['id'];
-			$query = array(
-				'$push' => array(
-				'connections' => array('id' => $id))
+			$query = array(				
+				'$push' => array('connections' => array('id' => $id))
 			);			
-			$condition = array('_id' => $_SESSION['loggedInUserId']);				
+			$mongoId = new \MongoId($_SESSION['loggedInUserId']);
+			$condition = array('_id' => $mongoId);				
 			$result = Users::connect($query,$condition);
 			if($result)
 				return '1';
@@ -38,15 +50,20 @@ class ConnectionsController extends \lithium\action\Controller {
 		public function getConnections(){
 					
 			$userCursor = array();
-			$condition = array('conditions' => array('_id' => $_SESSION['loggedInUserId']),'fields' => array('connections.id'));
-			$connections = Users::getUsers('all',$condition);
-			$friends = $connections[0];			
-			$connection = $friends['connections'][0];				
-			if($connection['id']){
-				$subCondition = array('_id' => $connection['id']);
-				array_push($userCursor,Users::getUsers('all', $subCondition));
+			$condition = array('conditions' => array('_id' => new \MongoId($_SESSION['loggedInUserId'])),'fields' => array('connections.id'));
+			$users = Users::getUsers('all',$condition);
+			foreach($users as $user)
+			{
+				foreach($user['connections'] as $connection)
+				{
+					if($connection['id']){
+						$subCondition = array('conditions' => array('_id' => new \MongoId($connection['id'])));
+						array_push($userCursor,Users::getUsers('all', $subCondition));
+					}
+				}
 			}
 			return compact('userCursor');
+			var_dump($userCursor);
 		}
 		
 		/* for creating a new group */

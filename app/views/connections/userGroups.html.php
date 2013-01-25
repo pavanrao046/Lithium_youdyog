@@ -22,7 +22,7 @@
 			echo "<a id='".$group['_id']."' href='' class='publicGroup' data-name='".$group['group_name']."'>".$group['group_name']."</a>";
 			if($group['owner'] == $_SESSION['loggedInUserId'])
 			{
-				echo "<span class='label' style='margin-left : 30px;'> Owner </span>";
+				echo "<span class='label label-inverse' style='margin-left : 30px;'> Owner </span>";
 				echo "<button class='btn pull-right btnDeleteGroup' title='Delete' style='margin-left : 30px;' id='".$group['_id']."'> <i class='icon-trash'> </i> </button>"; 
 				echo "<button class='btn pull-right btnEditGroup' title='Edit' style='margin-left : 30px;' id='".$group['_id']."'> <i class='icon-edit'> </i></button>"; 
 				

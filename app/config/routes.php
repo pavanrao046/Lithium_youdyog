@@ -42,11 +42,13 @@ if ($locales = Environment::get('locales')) {
  */
 Router::connect('/', 'Pages::view');
 
-// routes for Groups
+// routes for User Connections 
 
-Router::connect('/search','Connections::search');
+Router::connect('/searchUser','Connections::search');
 Router::connect('/connect','Connections::connect');
 Router::connect('/connections','Connections::getConnections');
+
+// routes for Groups
 Router::connect('/addGroup','Connections::addGroup');
 Router::connect('/getPrivateGroups', 'Connections::getPrivateGroups');
 Router::connect('/getPublicGroups', 'Connections::getPublicGroups');

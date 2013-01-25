@@ -23,25 +23,26 @@ $(document).ready(function(){
 		}
 		
 		// connect to a user
-		$('.connect').click(function(){		
+		$('#content').on('click','.connect',function(){		
+		
 			$.post('/connect',{id:$(this).attr('id')},function(data){
-				console.log(data);
 				if(data == '1')
 				{
-					$('#searchResults').html("Connected Successfully.");
+					$('#searchUserResults').html("Connected Successfully.");
 				}
 				else
 				{
-					$('#searchResults').html("Connection failed!");
+					$('#searchUserResults').html("Connection failed!");
 				} 
 			});
 			return false;
 		});
 		
 		// load all groups when groups button is ready
-		$('.btnAction').ready(function(){				
+		$('#content').on('ready', '.btnAction', function(){				
 			$.post('/getPrivateGroups',{},function(data){
 				var newdata = jQuery.parseJSON(data);
+				console.log(newdata);
 				for(var i=0;i<newdata.length;i++){
 					$('.groups').append("<li> <a href='#' id='"+newdata[i]+"' class='groupItem'>"+newdata[i]+"</a> </li>");
 				}
@@ -57,7 +58,6 @@ $(document).ready(function(){
 
 		// add a group
 		$('.frmNewGroup').submit(function(){
-			alert("create group alert");
 			$.post('/addGroup', {group : $('#txtGroupName').val()} , function(data){
 				var newdata = jQuery.parseJSON(data);
 				var userid = $(this).closest('div.groups').attr('data-id');
@@ -165,14 +165,31 @@ $(document).ready(function(){
 			return false;
 		});
 		
-		// edit a group
-		$('#groupsList')
+		// search a user via navbar search box
+		$('#frmSearchUser').submit(function(){
+			var searchName = $('#txtSearchName').val();
+			$.post('/searchUser', {searchName : searchName}, function(data){
+				var newdata = jQuery.parseJSON(data);
+				console.log(newdata);
+				for(var i=0;i<newdata.length;i++){
+					if(newdata[i]['isFriend'] == '0')
+					{
+						$('#content').html('<div id="searchUserResults" class="wrapper"> <legend> Search Results </legend> <div id="resultsList" class="listDiv"> Name : '+newdata[i]['name']+' <br> Email : '+newdata[i]['email']+'<button id="'+newdata[i]['id']['$id']+'" class="btn btn-success pull-right connect"> Connect </button> </div></div>');
+					}
+					else
+					{
+						$('#content').html('<div id="searchUserResults" class="wrapper"> <legend> Search Results </legend> <div id="resultsList" class="listDiv"> Name : '+newdata[i]['name']+' <br> Email : '+newdata[i]['email']+'<button id="'+newdata[i]['id']['$id']+'" class="btn btn-success pull-right unconnect"> Unconnect </button> </div></div>');
+					}
+				}
+			});
+			return false;
+		});
 		
 				
 });
 
 
-/* int_25-01-13 */
+/* integration_25-01-13 | login, register | Sumanth, Pavan */
 
 // For alternate Email 
 

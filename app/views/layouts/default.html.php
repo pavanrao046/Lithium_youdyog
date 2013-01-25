@@ -50,11 +50,11 @@
                     <li id="logoutNav" class="navItem"><a href="/logout" style="float:right;"> Logout </a></li>
                     </ul>
                     <div class="navbar-search pull-right">
-                    	<?=$this->form->create(); ?>                    	
-			<?=$this->form->text('name',array('id' => 'txtSearchName','class' => 'pull-right search-query span2', 'placeholder' => 'Search User','style' => 'margin-top:0.5%;')); ?>
-			<div class="icon-search"></div>
-			<?=$this->form->end(); ?>
-		    </div>
+                    	<form id="frmSearchUser" action = "" method = "post">
+                   			<input type = "text" id = "txtSearchName" class = "pull-right search-query span2" placeholder = "Search User" style = "margin-top:0.5%;" />
+							<div class="icon-search"></div>
+						</form>
+		    		</div>
 		    
 		    <?php } 
 		    ?>

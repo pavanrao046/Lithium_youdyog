@@ -8,11 +8,11 @@ foreach($userCursor as $friends)
 	foreach($friends as $friend)
 	{
 		echo "<tr><td>";
-		echo $friend['name'];
+		echo $friend['first_name'];
 		echo '</td>';
 		echo '<td class="span2" > <div class=groupLabel'.$friend["_id"].' > </div></td>';
 		
-		echo ' <td><div class="btn-group pull-right" style="margin-bottom : 20px !important;">
+		echo ' <td><div class="btn-group pull-right" style="margin-top : 8px;">
   			<a class="btn dropdown-toggle" data-toggle="dropdown" href="#" id='.$friend['_id'].' class="btnAction">
    				 Groups
     				<span class="caret"></span>
