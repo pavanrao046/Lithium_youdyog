@@ -1,6 +1,3 @@
-<?php //use app\models\Users; ?>
-
-
 <?php
 if($users[0]['name']){
 ?>

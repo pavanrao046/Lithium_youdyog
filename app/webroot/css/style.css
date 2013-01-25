@@ -1,3 +1,5 @@
+/* style for general components */
+
 a:active,a:hover{
 	text-decoration : none;
 }
@@ -20,6 +22,28 @@ a:active,a:hover{
 	margin-top : 20px;
 }
 
+.wrapper{
+	border : 1px solid;
+	border-color : #CFCFCF;
+	padding : 20px;
+	border-radius : 2px;
+	margin-left : auto;
+	margin-right : auto;
+}
+
+.listDiv{
+	border-bottom : 1px solid;
+	border-color : #EFEFEF;
+	padding-bottom : 20px;
+	padding-top : 20px;
+	border-radius : 2px;
+	display : block;
+}
+
+.pull-center{
+	margin-left : auto;
+	margin-right : auto;
+}
 /* style for search icon in nav bar */
 
 .navbar-search {
@@ -60,22 +84,6 @@ td{
 
 
 /* style for public groups page */
-.wrapper{
-	border : 1px solid;
-	border-color : #CFCFCF;
-	padding : 20px;
-	border-radius : 2px;
-}
-
-.listDiv{
-	border-bottom : 1px solid;
-	border-color : #EFEFEF;
-	padding-bottom : 20px;
-	padding-top : 20px;
-	border-radius : 2px;
-	display : block;
-}
-
 
 #btnSearchGroup{
 	margin-top : 5px;

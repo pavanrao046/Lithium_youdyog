@@ -54,16 +54,10 @@ $(document).ready(function(){
 		$('.txtGroupName').click(function(){
 			return false;		
 		});
-		
-		// show create new group text box on click of create new group option
-		$('#createGroup').click(function(){
-			$('#txtGroupName').css('display','block');
-			$('#txtGroupName').hide().fadeIn(300);		
-			return false;
-		});
-		
-		// update DB with new group when create new group text box is submitted
+
+		// add a group
 		$('.frmNewGroup').submit(function(){
+			alert("create group alert");
 			$.post('/addGroup', {group : $('#txtGroupName').val()} , function(data){
 				var newdata = jQuery.parseJSON(data);
 				var userid = $(this).closest('div.groups').attr('data-id');
@@ -171,21 +165,348 @@ $(document).ready(function(){
 			return false;
 		});
 		
-		// get assigned groups for users
-		/*
-		$( '.groups' ).ready(function () { 
-			$('.groups').each(function(index){
-				var userid = $(this).attr('data-id');
-				$.post('connections/getUserGroups', {userid: userid}, function(data){
-					//console.log(data);
-					var newdata = jQuery.parseJSON(data);
-					for(var i=0;i<newdata.length;i++){
-						$('.groupLabel'+userid).append('<span class="label label-info">'+newdata[i]+'</span>');
-						console.log(userid+"  :  "+newdata[i]);
-					}
-				});
-			});			
-		});
-		*/
+		// edit a group
+		$('#groupsList')
+		
+				
 });
 
+
+/* int_25-01-13 */
+
+// For alternate Email 
+
+$(document).ready(function(){
+		 $("#emailshow").click(function(){
+		
+			$(".txtemail").show();
+			return false;
+		});
+});
+
+$(document).ready(function(){
+		 $("#emailshow").dblclick(function(){
+			$(".txtemail").hide();
+			return false;
+		});
+});
+
+
+// To validate Email id
+
+function validateEmail(sEmail) {
+    var filter = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    if (filter.test(sEmail)) {
+
+        return true;
+    }
+    else {
+
+        return false;
+    }
+
+
+}
+
+// Password shopuld contain alpha numeric type
+
+function validateAlphanumeric(sPass) {
+    var filter = /^[a-zA-Z0-9]+$/;
+    if (filter.test(sPass)) {
+
+        return true;
+    }
+    else {
+
+        return false;
+    }
+}
+
+// Contact no should contain numbers
+
+function validateNumber(sNumber) {
+    var filter = /^[0-9]+$/;
+    if (filter.test(sNumber)) {
+
+        return true;
+    }
+    else {
+
+        return false;
+    }
+}
+
+// To validate Password
+
+function validatePassword(sPass) {
+    var filter = /^[a-zA-Z0-9]{4,32}$/;
+    if (filter.test(sPass)) {
+
+        return true;
+    }
+    else {
+
+        return false;
+    }
+}
+
+
+// username should contain only alphabets n check
+
+function validateAlphabets(sAlpha) {
+    var filter = /^[a-zA-Z]+$/;
+    if (filter.test(sAlpha)) {
+
+        return true;
+    }
+    else {
+
+        return false;
+    }
+}
+
+// to check for login
+
+function validateLogin(val1,val2){
+
+if(validateEmail($("#txtemail").val()) && validatePassword($("#txtpassword").val())){
+
+return true;
+}
+
+return false;
+
+}
+
+
+// for First Name and Last Name
+function validateName(sname) {
+    var filter = /^[a-zA-Z]{2,32}$/;
+    if (filter.test(sname)) {
+
+        return true;
+    }
+    else {
+
+        return false;
+    }
+}
+
+
+
+// For Date Format
+
+
+
+ $(function() {
+$( "#datepicker" ).datepicker({
+showOn: "button",
+buttonImage: "/img/calendar.gif",
+buttonImageOnly: true
+});
+});
+
+	
+
+ // To check for Registration for a user
+
+function validateRegisterPage(){
+var result = false;
+
+	if(validateEmail($("#txtemail").val())){
+		$("#emailalertBox").css("display","block").hide().fadeIn(200);
+		$("#emailalertBox").css("display","none");
+		result = true;
+		
+	}
+
+	else{
+		$("#emailalertBox").css("display","block").hide().fadeIn(200);
+		$("#emailalertBox").html("Please enter valid email id");
+		
+	}
+	
+	if(validateAlphabets($("#txtfname").val())){
+		$("#fnamealertBox").css("display","block").hide().fadeIn(200);
+		$("#fnamealertBox").css("display","none");
+		result = true;
+		
+	}
+
+	else{
+		$("#fnamealertBox").css("display","block").hide().fadeIn(200);
+		$("#fnamealertBox").html("First Name cannot be empty");
+		
+	}
+         
+         if(validateAlphabets($("#txtlname").val())){
+		$("#lnamealertBox").css("display","block").hide().fadeIn(200);
+		$("#lnamealertBox").css("display","none");
+		result = true;
+		
+	}
+
+	else{
+		$("#lnamealertBox").css("display","block").hide().fadeIn(200);
+		$("#lnamealertBox").html("Last Name cannot be empty");
+		
+	}
+         
+	if(validateAlphanumeric($("#password").val())){
+		$("#passwordalertBox").css("display","block").hide().fadeIn(200);
+		$("#passwordalertBox").css("display","none");
+		result =  true;
+	}
+
+	else{
+		$("#passwordalertBox").css("display","block").hide().fadeIn(200);
+		$("#passwordalertBox").html("Password Should Contain AlphaNumeric Values");
+		
+
+	}
+	if(validateAlphabets($("#txtusername").val())){
+		$("#usernamealertBox").css("display","block").hide().fadeIn(200);
+		$("#usernamealertBox").css("display","none");
+		result = true;
+	}
+
+	else{
+		$("#usernamealertBox").css("display","block").hide().fadeIn(200);
+		$("#usernamealertBox").html("Only Alphabets allowed");
+		
+	}
+
+	if(validateNumber($("#txtcontactno").val())){
+		$("#contactnoalertBox").css("display","block").hide().fadeIn(200);
+	        $("#contactnoalertBox").css("display","none");
+	result = true;	
+	
+	}
+
+	else{
+		$("#contactnoalertBox").css("display","block").hide().fadeIn(200);
+		$("#contactnoalertBox").html("Not a valid phone number / Cannot be left blank.");
+		return false;
+
+	}
+
+	return result;
+	
+}
+
+//To validate User Name length .... (minimum requirment)
+
+
+
+// password Strength ..... 
+
+function passwordStrength(password,passwordStrength,errorField)
+{
+ var desc = new Array();
+ desc[0] = "Password strength: Very weak";
+ desc[1] = "Password strength: Weak";
+ desc[2] = "Password strength: Better";
+ desc[3] = "Password strength: Medium";
+ desc[4] = "Password strength: Strong";
+ desc[5] = "Password strength: Strongest";
+
+ var score   = 0;
+
+ //if password bigger than 6 give 1 point
+ if (password.length > 6) score++;
+ 
+ //if password has both lower and uppercase characters give 1 point 
+ if ( ( password.match(/[a-z]/) ) && ( password.match(/[A-Z]/) ) ) score++;
+
+ //if password has at least one number give 1 point
+ if (password.match(/\d+/)) score++;
+
+ //if password has at least one special caracther give 1 point
+ if ( password.match(/.[!,@,#,$,%,^,&,*,?,_,~,-,(,)]/) ) score++;
+
+ //if password bigger than 12 give another 1 point
+ if (password.length > 10) score++;
+
+  passwordStrength.innerHTML = desc[score];
+  passwordStrength.className = "strength" + score;
+
+ if (password.length < 6)
+ {} 
+ 
+}
+
+// Recaptcha Colors / Custimization ... use white, red, or remove script for classic use
+
+var RecaptchaOptions = {
+    theme : 'white'
+ };
+ 
+// for Password Comparission
+ 
+ function comp_pass()
+ {
+ var pass_comp = false;
+
+ 	if($("#password").val() == $("#txtcpass").val())
+ 	{
+		$("#cpasswordalertBox").css("display","block").hide().fadeIn(200);
+	$("#cpasswordalertBox").css("display","none");
+	result = true;	
+	}
+        else
+        {
+		$("#cpasswordalertBox").css("display","block").hide().fadeIn(200);
+		$("#cpasswordalertBox").html("Password did not match. Please try again!!");
+		return false;
+        }
+ 
+ return pass_comp;       
+ } 
+// for First & Last Name  
+ 
+$(document).ready(function() {
+   $("#txtfname").keydown(function(event) {
+       validateName(event);
+    });
+    $("#txtlname").keydown(function(event) {
+       validateName(event);
+    });
+});
+ 
+function validateName(event) {
+         // Allow: backspace, delete, tab, escape, and enter
+        if ( event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 27 || event.keyCode == 13 ||  
+             // Allow: home, end, left, right
+            (event.keyCode >= 35 && event.keyCode <= 39)) {
+                 // let it happen, don't do anything
+                 return;
+        }
+        else {
+            // Ensure that it is a alphabets and stop the keypress
+            if (event.shiftKey ||(event.keyCode < 65 || event.keyCode > 90) && (event.keyCode < 97 || event.keyCode > 123) && event.keyCode != 32)
+            {
+                event.preventDefault(); 
+            }   
+        }
+}
+ 
+// for phone number 
+
+$(document).ready(function() {
+    $("#txtcontactno").keydown(function(event) {
+        // Allow: backspace, delete, tab, escape, and enter
+        if ( event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 27 || event.keyCode == 13 || 
+             // Allow: home, end, left, right
+            (event.keyCode >= 35 && event.keyCode <= 39)) {
+                 // let it happen, don't do anything
+                 return;
+        }
+        else {
+            // Ensure that it is a number and stop the keypress
+            if (event.shiftKey || (event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105 )) {
+                event.preventDefault(); 
+            }   
+        }
+    });
+});
+ 

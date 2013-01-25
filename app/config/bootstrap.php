@@ -62,6 +62,15 @@ require __DIR__ . '/bootstrap/connections.php';
  */
 require __DIR__ . '/bootstrap/session.php';
 
+
+
+/**
+ * This file contains configuration and libraries for captcha and user or web service
+ * authentication.
+ */
+
+require __DIR__ . '/bootstrap/recaptchalib.php';
+
 /**
  * This file contains your application's globalization rules, including inflections,
  * transliterations, localized validation, and how localized text should be loaded. Uncomment this
@@ -81,5 +90,21 @@ require __DIR__ . '/bootstrap/session.php';
 if (PHP_SAPI === 'cli') {
 	require __DIR__ . '/bootstrap/console.php';
 }
+
+
+
+use app\models\Users;
+use lithium\security\Password;
+
+Users::applyFilter('save', function($self, $params, $chain) {
+    if ($params['data']) {
+        $params['entity']->set($params['data']);
+        $params['data'] = array();
+    }
+    if (!$params['entity']->exists()) {
+        $params['entity']->password = Password::hash($params['entity']->password);
+    }
+    return $chain->next($self, $params, $chain);
+});
 
 ?>

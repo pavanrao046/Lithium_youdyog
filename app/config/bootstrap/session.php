@@ -48,4 +48,16 @@ Session::config(array(
 // 	)
 // ));
 
+use lithium\security\Auth;
+
+Auth::config(array(
+ 	'loginauth' => array(
+		'adapter' => 'Form',
+ 		'model' => 'Users',
+ 		'fields' => array('email', 'password') 		
+ 	)
+ ));
+ 
+
+
 ?>

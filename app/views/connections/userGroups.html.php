@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <div id="groupsWrapper" class="wrapper">
 	<div id="myGroupsAlert" style="display:none;"></div>
 	<legend> <span id="groupLegend">My Groups</span> 
@@ -19,7 +20,7 @@
 			<div class="listDiv">
 	<?php
 			echo "<a id='".$group['_id']."' href='' class='publicGroup' data-name='".$group['group_name']."'>".$group['group_name']."</a>";
-			if($group['owner'] == '50f69176904e1d66affec20d')
+			if($group['owner'] == $_SESSION['loggedInUserId'])
 			{
 				echo "<span class='label' style='margin-left : 30px;'> Owner </span>";
 				echo "<button class='btn pull-right btnDeleteGroup' title='Delete' style='margin-left : 30px;' id='".$group['_id']."'> <i class='icon-trash'> </i> </button>"; 
@@ -45,7 +46,7 @@
 			
 			foreach($group['users'] as $member)
 			{
-				if($member['id'] == '50f69176904e1d66affec20d')
+				if($member['id'] == $_SESSION['loggedInUserId'])
 				{
 					$isMember = '1';
 					break;

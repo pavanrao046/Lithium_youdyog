@@ -11,7 +11,7 @@
 <head>
 	<?php echo $this->html->charset();?>
 	<title>Application &gt; <?php echo $this->title(); ?></title>
-	<?php echo $this->html->style(array('debug', 'bootstrap', 'style', 'bootstrap-responsive')); ?>
+	<?php echo $this->html->style(array('debug','bootstrap', 'style', 'bootstrap-responsive')); ?>
 	<?php echo $this->html->link('Icon', null, array('type' => 'icon')); ?>
 </head>
 <header class="">
@@ -24,10 +24,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                   </a>
-                  <a class="brand" href="#">Aalaapa</a>
+                  <a class="brand" href="#" style="color : #58ACFA !important;">Bahumat</a>
                   <div class="nav-collapse collapse navbar-inverse-collapse">
+                   <?php if(isset($_SESSION['loginSuccess'])){?> 
                     <ul class="nav">
-                      <li id="homeNav" class="navItem"><a href="/search">Home</a></li>
+                      <li id="homeNav" class="navItem"><a href="/user">Home</a></li>
                       <li id="aboutNav" class="navItem"><a href="#">About</a></li>
                       <li id="friendsNav" class="navItem"><a href="/connections">Friends</a></li>
                       <li class="dropdown">
@@ -42,15 +43,21 @@
                           <li><a href="#">One more separated link</a></li>
                         </ul>
                       </li>
+                      
                     </ul>
                   	
-                    
+                  	<ul class="nav pull-right">
+                    <li id="logoutNav" class="navItem"><a href="/logout" style="float:right;"> Logout </a></li>
+                    </ul>
                     <div class="navbar-search pull-right">
                     	<?=$this->form->create(); ?>                    	
 			<?=$this->form->text('name',array('id' => 'txtSearchName','class' => 'pull-right search-query span2', 'placeholder' => 'Search User','style' => 'margin-top:0.5%;')); ?>
 			<div class="icon-search"></div>
 			<?=$this->form->end(); ?>
 		    </div>
+		    
+		    <?php } 
+		    ?>
                   </div><!-- /.nav-collapse -->
                 </div>
               </div><!-- /navbar-inner -->
@@ -59,12 +66,11 @@
 </header>
 <body class="app">
 	<div id="container" class="container">
-		
 		<div id="content">
 			<?php echo $this->content(); ?>
 		</div>
 	</div>
 </body>
-<?php echo $this->html->script(array('jquery','youdyog','bootstrap-dropdown','bootstrap-collapse', 'bootstrap-modal')); ?>
+<?php echo $this->html->script(array('jquery','admin','youdyog','bootstrap-dropdown','bootstrap-collapse', 'bootstrap-modal')); ?>
 	
 </html>

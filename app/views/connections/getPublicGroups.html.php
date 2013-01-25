@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <div id="groupsWrapper" class="wrapper">
 	<legend> <span id="groupLegend">Groups</span> 
 		<form class="form-search pull-right">
@@ -18,7 +19,7 @@
 	<?php
 			echo "<a id='".$group['_id']."' href='' class='publicGroup' data-name='".$group['group_name']."'>".$group['group_name']."</a>";
 			foreach($group['users'] as $groupUsers){			
-				if($groupUsers['id'] == '50f69176904e1d66affec20d'){
+				if($groupUsers['id'] == $_SESSION['loggedInUserId']){
 					$exists = '1';					
 					break;
 				}				

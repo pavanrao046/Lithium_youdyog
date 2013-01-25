@@ -60,7 +60,7 @@ require __DIR__ . '/bootstrap/connections.php';
  * This file contains configuration for session (and/or cookie) storage, and user or web service
  * authentication.
  */
-// require __DIR__ . '/bootstrap/session.php';
+require __DIR__ . '/bootstrap/session.php';
 
 /**
  * This file contains your application's globalization rules, including inflections,
@@ -81,5 +81,21 @@ require __DIR__ . '/bootstrap/connections.php';
 if (PHP_SAPI === 'cli') {
 	require __DIR__ . '/bootstrap/console.php';
 }
+
+
+
+use app\models\Users;
+use lithium\security\Password;
+
+Users::applyFilter('save', function($self, $params, $chain) {
+    if ($params['data']) {
+        $params['entity']->set($params['data']);
+        $params['data'] = array();
+    }
+    if (!$params['entity']->exists()) {
+        $params['entity']->password = Password::hash($params['entity']->password);
+    }
+    return $chain->next($self, $params, $chain);
+});
 
 ?>

@@ -3,8 +3,11 @@
 namespace app\controllers;
 use app\models\Users;
 use app\models\Groups;
+session_start();
 
 class ConnectionsController extends \lithium\action\Controller {
+		
+	
 		
 		/* for searching the user */
 		public function search(){
@@ -17,13 +20,13 @@ class ConnectionsController extends \lithium\action\Controller {
 		
 		/* for connecting to a user */
 		public function connect(){
-			$myId = "50f69176904e1d66affec20d";
+			
 			$id = $_POST['id'];
 			$query = array(
 				'$push' => array(
 				'connections' => array('id' => $id))
 			);			
-			$condition = array('_id' => $myId);				
+			$condition = array('_id' => $_SESSION['loggedInUserId']);				
 			$result = Users::connect($query,$condition);
 			if($result)
 				return '1';
@@ -33,9 +36,9 @@ class ConnectionsController extends \lithium\action\Controller {
 		
 		/* for retrieving all the connections of the logged in user */
 		public function getConnections(){
-			$myId = "50f69176904e1d66affec20d";			
+					
 			$userCursor = array();
-			$condition = array('conditions' => array('_id' => $myId),'fields' => array('connections.id'));
+			$condition = array('conditions' => array('_id' => $_SESSION['loggedInUserId']),'fields' => array('connections.id'));
 			$connections = Users::getUsers('all',$condition);
 			$friends = $connections[0];			
 			$connection = $friends['connections'][0];				
@@ -48,11 +51,11 @@ class ConnectionsController extends \lithium\action\Controller {
 		
 		/* for creating a new group */
 		public function addGroup(){
-			$myId = "50f69176904e1d66affec20d";
+			
 			$data = array();
 			$groupName = $_POST['group'];				
 			$data['group_name'] = $groupName;
-			$data['owner'] = $myId;
+			$data['owner'] = $_SESSION['loggedInUserId'];
 			$data['visibility'] = "private";
 			$result = Groups::addGroup($data);
 			if($result)
@@ -63,9 +66,9 @@ class ConnectionsController extends \lithium\action\Controller {
 		
 		/* for retrieving groups of logged in user */
 		public function getPrivateGroups(){
-			$myId = "50f69176904e1d66affec20d";
+			
 			$groupList = array();
-			$options = array('conditions' => array('owner' => $myId,'visibility' => 'private'),'fields' => array('group_name'));
+			$options = array('conditions' => array('owner' => $_SESSION['loggedInUserId'],'visibility' => 'private'),'fields' => array('group_name'));
 			$groups = Groups::getGroups('all',$options);
 			foreach($groups as $group)
 			{
@@ -86,16 +89,16 @@ class ConnectionsController extends \lithium\action\Controller {
 		/* for adding user to a public group */
 		public function addUserToPublicGroup(){
 		$groupId = $_POST['groupId'];
-		$myId = "50f69176904e1d66affec20d";
+		
 		$query = array(
-			'$push' => array('users' => array('id' => $myId)));		
+			'$push' => array('users' => array('id' => $_SESSION['loggedInUserId'])));		
 		$condition = array('_id' => $groupId);		
 		$result = Groups::updateGroup($query,$condition);
 		if($result)
 		{
 			$queryUser = array(
 				'$push' => array('connections' => array('group_id' => $groupId)));		
-			$conditionUser = array('_id' => $myId);		
+			$conditionUser = array('_id' => $_SESSION['loggedInUserId']);		
 			$resultUser = Users::updateUser($queryUser,$conditionUser);
 			if($resultUser)
 				return '1';
@@ -109,16 +112,16 @@ class ConnectionsController extends \lithium\action\Controller {
 		/* for removing user from a public group */
 		public function removeUserFromPublicGroup(){
 			$groupId = $_POST['groupId'];
-			$myId = "50f69176904e1d66affec20d";
+			
 			$query = array(
-				'$pull' => array('users' => array('id' => $myId)));		
+				'$pull' => array('users' => array('id' => $_SESSION['loggedInUserId'])));		
 			$condition = array('_id' => $groupId);		
 			$result = Groups::updateGroup($query,$condition);
 			if($result)
 			{
 				$queryUser = array(
 					'$pull' => array('connections' => array('group_id' => $groupId)));		
-				$conditionUser = array('_id' => $myId);		
+				$conditionUser = array('_id' => $_SESSION['loggedInUserId']);		
 				$resultUser = Users::updateUser($queryUser,$conditionUser);
 				if($resultUser)
 					return '1';
@@ -148,7 +151,7 @@ class ConnectionsController extends \lithium\action\Controller {
 		
 		/* for searching a group */			
 		public function searchGroup(){
-			$myId = "50f69176904e1d66affec20d";		
+		
 			$searchName = $_POST['group_name'];	
 			$groupList = array();
 			$isMember = '0';
@@ -156,7 +159,7 @@ class ConnectionsController extends \lithium\action\Controller {
 			$groups = Groups::getGroups('all',array('conditions' => array('group_name' => $regexObj,'visibility' => 'public')));
 			foreach($groups as $group)
 			{			foreach($group['users'] as $user){
-							if($user['id'] == $myId){
+							if($user['id'] == $_SESSION['loggedInUserId']){
 								$isMember = '1';
 								break;
 							}
@@ -169,16 +172,16 @@ class ConnectionsController extends \lithium\action\Controller {
 		
 		/* for retrieving all the groups pertaining to logged in user */
 		public function userGroups(){
-			$myId = "50f69176904e1d66affec20d";
+			
 			$groupList = array();
 			$isOwner = '0';
-			$groups = Groups::getGroups('all',array('conditions' => array('$or' =>array(array('owner' => $myId),array('users.id' => $myId))),'fields' => array('group_name','_id','owner','users.id','visibility')));
+			$groups = Groups::getGroups('all',array('conditions' => array('$or' =>array(array('owner' => $_SESSION['loggedInUserId']),array('users.id' => $_SESSION['loggedInUserId']))),'fields' => array('group_name','_id','owner','users.id','visibility')));
 			return compact('groups');
 		}
 		
 		/* for deleting a group */
 		public function deleteGroup(){
-			$myId = "50f69176904e1d66affec20d";
+			
 			$groupId = $_POST['groupId'];
 			$mongoId = new \MongoId($groupId);
 			$result = Groups::deleteGroup(array('_id' => $mongoId));

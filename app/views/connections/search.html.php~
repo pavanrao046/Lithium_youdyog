@@ -2,7 +2,6 @@
 
 
 <?php
-var_dump($users);
 if($users[0]['name']){
 ?>
 <div id="searchResults"> 

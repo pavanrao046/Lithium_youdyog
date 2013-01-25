@@ -42,18 +42,6 @@ if ($locales = Environment::get('locales')) {
  */
 Router::connect('/', 'Pages::view');
 
-
-// routes for search connections
-/*
-Router::connect('/connect','Connections::search');
-Router::connect('/connect/connections','Connections::connections');
-Router::connect('/connect/auth','Connections::connect');
-Router::connect('/connect/connections/createGroup','Connections::creategroup');
-Router::connect('/connect/connections/getGroups','Connections::getGroups');
-Router::connect('/connect/connections/addUserToGroup', 'Connections::addUserToGroup');
-Router::connect('/connect/connections/getUserGroups', 'Connections::getUserGroups');
-*/
-
 // routes for Groups
 
 Router::connect('/search','Connections::search');
@@ -69,6 +57,25 @@ Router::connect('/searchGroup', 'Connections::searchGroup');
 Router::connect('/myGroups', 'Connections::userGroups');
 Router::connect('/deleteGroup', 'Connections::deleteGroup');
 
+// routes for logout module
+Router::connect('/logout', 'Login::delete');
+Router::connect('/logout/{:args}','Login::delete');
+
+
+// routes for error pages
+Router::connect('/loginError', 'ErrorPages::loginerror');
+
+
+Router::connect('/login', 'Login::login');
+
+// routes for login module
+Router::connect('/admin', 'Admin::manage');
+
+
+// routes for registartion module
+Router::connect('/register', 'User::register');
+Router::connect('/success/{:args}', 'User::success');
+Router::connect('/forgot', 'User::forgot');
 
 /**
  * Connect the rest of `PagesController`'s URLs. This will route URLs like `/pages/about` to
