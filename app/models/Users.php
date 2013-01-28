@@ -21,7 +21,7 @@ class Users extends \lithium\data\Model {
 		return $result;		
 	}
 	
-	/* for adding the user to a group */
+	/* for updating user collection */
 	public function updateUser($query, $condition){
 		$result = Users::update($query,$condition, array('atomic' => false));		
 		return $result;	

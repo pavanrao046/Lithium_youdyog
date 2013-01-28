@@ -4,6 +4,13 @@ a:active,a:hover{
 	text-decoration : none;
 }
 
+footer{
+	color : #888888;
+	position : absolute;
+	top : 90%;
+	width : 100%;	
+}
+
 
 #searchResults{
 	border : 1px solid;

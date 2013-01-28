@@ -24,7 +24,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                   </a>
-                  <a class="brand" href="#" style="color : #58ACFA !important;">Youdyog</a>
+                  <a class="brand" href="/login" style="color : #58ACFA !important;">Youdyog</a>
                   <div class="nav-collapse collapse navbar-inverse-collapse">
                    <?php if(isset($_SESSION['loginSuccess'])){?> 
                     <ul class="nav">
@@ -71,6 +71,7 @@
 		</div>
 	</div>
 </body>
+<footer><center><hr style="width : 100%"> &COPY; Copyright. 2013. www.youdyog.in. All Rights Reserved. </center></footer>
 <?php echo $this->html->script(array('jquery','admin','youdyog','bootstrap-dropdown','bootstrap-collapse', 'bootstrap-modal')); ?>
 	
 </html>
