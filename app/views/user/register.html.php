@@ -1,6 +1,11 @@
 <div class="wrapper">
 
 <legend> Register </legend>
+<?php if($_SESSION['tempuserEmail'] == null || $_SESSION['tempUserEmail'] == ""){ ?>
+<div id="alertBox" class="wrapper alert-danger" style="display: block"><center><strong> Oops! </strong> The URL seems to be broken.</center></div>
+<?php } 
+else {
+?>
 
 <?= $this->form->create() ?>
 
@@ -54,4 +59,5 @@ else{
 
 <div id="alertBox" class="alert alert-danger" style="display: none;"></div>
 <?= $this->form->end(); ?>
+<?php } ?>
 </div>

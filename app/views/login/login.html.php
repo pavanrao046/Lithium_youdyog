@@ -34,7 +34,7 @@ else{
 	return true;
 }
 ')); ?></p>
-<a href="/register">Register</a> <a href="/forgot" style="margin-left : 20px;">Forgot Password</a></p>
+<a href="/register">Register</a> <a href="/forgot" style="margin-left : 20px;">Forgot Password</a>
 
 <div id="alertBox" class="alert alert-danger" style="display: none;"></div>
 <?= $this->form->end(); ?>

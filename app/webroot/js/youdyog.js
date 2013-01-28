@@ -495,6 +495,35 @@ $(document).ready(function() {
 			var newdata = jQuery.parseJSON(data);
 			$('#uniqueId').val(newdata['link']);
 			$('#newPassword').css('display' , 'block');
+			$('#emailContainer').append('<a href ="http://localhost/forgotpassword/'+newdata['link']+'" id="changePasswordLink"> Change Password </a>');
 		});
+	});
+	
+	$('#btnResetPassword').click(function(){
+		var newPassword = $('#txtNewPassword').val();
+		var confirmPassword = $('#txtConfirmPassword').val();
+		
+		if(newPassword != confirmPassword)
+		{
+			$('#alertNewPassword').css('display','block');
+			$('#alertNewPassword').attr('class','alert alert-danger');
+			$('#alertNewPassword').html('<strong> Oops! </strong> Passwords do not match. Please try again.');
+			$('#alertNewpassword').hide().fadeIn(300);
+
+		}
+		else
+		{
+			var uniqueId = location.pathname.substring(16);
+			$.post('/updatePassword',{password : newPassword, uniqueId : uniqueId},function(data){
+				if(data == 1){
+					$('#alertNewPassword').css('display','block');
+					$('#innerWrapper').css('display','none');
+					$('#alertNewPassword').attr('class','alert alert-success');
+					$('#alertNewPassword').html('Your password has been changed. Please <strong> <a href="/login"> login </a> </strong> with your new password.');
+					$('#alertNewpassword').hide().fadeIn(300);
+				}
+			});
+		}
+		return false;
 	});
 });

@@ -75,13 +75,18 @@ Router::connect('/admin', 'Admin::manage');
 
 
 // routes for registartion module
+Router::connect('/register', 'Login::login');
 Router::connect('/register/{:args}', 'User::register');
 Router::connect('/success/{:args}', 'User::success');
-Router::connect('/forgot', 'User::forgot');
 Router::connect('/welcome', 'User::welcome');
 Router::connect('/participate', 'User::participate');
 Router::connect('/profile','User::profile');
+
+// routes for forgotten password
 Router::connect('/getLink','User::getLink');
+Router::connect('/forgot', 'User::forgot');
+Router::connect('/forgotpassword/{:args}','User::forgotpassword');
+Router::connect('/updatePassword', 'User::updatePassword');
 
 /**
  * Connect the rest of `PagesController`'s URLs. This will route URLs like `/pages/about` to

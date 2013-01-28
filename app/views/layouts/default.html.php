@@ -24,7 +24,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                   </a>
-                  <a class="brand" href="#" style="color : #58ACFA !important;">Bahumat</a>
+                  <a class="brand" href="#" style="color : #58ACFA !important;">Youdyog</a>
                   <div class="nav-collapse collapse navbar-inverse-collapse">
                    <?php if(isset($_SESSION['loginSuccess'])){?> 
                     <ul class="nav">

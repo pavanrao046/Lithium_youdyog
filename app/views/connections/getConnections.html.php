@@ -18,14 +18,10 @@ foreach($userCursor as $friends)
     				<span class="caret"></span>
   			</a>
   			<ul class="dropdown-menu">
-  				<!-- 
-  				<li> <a href="#" id="Family" class="groupItem" data-id='.$friend['_id'].'> Family </a></li>
-    				<li> <a href="#" id="Work" class="groupItem" data-id='.$friend['_id'].'> Work </a> </li>
-    				<li> <a href="#" id="Friends" class="groupItem" data-id='.$friend['_id'].'> Friends </a> </li>
-    				-->
+  				
   				<div class="groups" data-id='.$friend['_id'].'>
     				
-    				</div>
+    			</div>
     				
     				<li class="divider"> </li>
     				<li><form id="frmNewGroup" class="frmNewGroup">

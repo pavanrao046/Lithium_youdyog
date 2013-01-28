@@ -14,7 +14,6 @@ class UserController extends \lithium\action\Controller {
 
 	public function register()
 	{
-		var_dump($_SESSION['tempuserId']);
 		if(isset($this->request->data['email'])) {
 			$condition = array('_id'=>new \MongoId($_SESSION['tempuserId']));
 			$this->request->data['password'] = Password::hash($this->request->data['password']);
@@ -30,7 +29,7 @@ class UserController extends \lithium\action\Controller {
 			$tempuser = Users::first(array('conditions'=> array('uniqueno'=>$uniqueno)));
 			$_SESSION['tempuserId'] = $tempuser['_id'];
 			$_SESSION['tempuserEmail'] = $tempuser['email'];
-			var_dump($_SESSION['tempuserEmail']);
+			//var_dump($_SESSION['tempuserEmail']);
 		}
 		
 	}
@@ -68,22 +67,37 @@ class UserController extends \lithium\action\Controller {
 
 	public function forgot()
 	{
+
 		
-			$privatekey = "6Lcb8tsSAAAAAJcxKb5f0AzH2fvKx1zjnlFHPqon";
-                $resp = recaptcha_check_answer ($privatekey,
+	}
+	
+	public function forgotpassword(){
+	
+	}
+	
+	public function updatePassword(){
+		$password = Password::hash($_POST['password']);
+		$uniqueId = $_POST['uniqueId'];
+		$privatekey = "6Lcb8tsSAAAAAJcxKb5f0AzH2fvKx1zjnlFHPqon";
+        $resp = recaptcha_check_answer ($privatekey,
                                 $_SERVER["REMOTE_ADDR"],
                                 $_POST["recaptcha_challenge_field"],
                                 $_POST["recaptcha_response_field"]);
 
-  if (!$resp->is_valid && $this->request->data) {
-    // What happens when the CAPTCHA was entered incorrectly
-    die ("<h2>The reCAPTCHA wasn't entered correctly.</h2> Go back and try it again." .
-         "(reCAPTCHA said: " . $resp->error . ")");
-  } 
-  else {
-    // Your code here to handle a successful verification
-    
-  }
+  		if (!$resp->is_valid) {
+    		// What happens when the CAPTCHA was entered incorrectly
+    		
+  		} 
+  		else {
+    		// Your code here to handle a successful verification
+    		return "wrong";
+    		
+  		}
+		$result = Users::updateUser(array('password' => $password),array('uniqueno' => $uniqueId));
+		if($result)
+			return '1';
+		else
+			return '0';
 	}
 
 }
