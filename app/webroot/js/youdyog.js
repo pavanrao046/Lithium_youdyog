@@ -308,21 +308,6 @@ function validateName(sname) {
         return false;
     }
 }
-
-
-
-// For Date Format
-
-
-
- $(function() {
-$( "#datepicker" ).datepicker({
-showOn: "button",
-buttonImage: "/img/calendar.gif",
-buttonImageOnly: true
-});
-});
-
 	
 
  // To check for Registration for a user
@@ -479,33 +464,6 @@ var RecaptchaOptions = {
  
  return pass_comp;       
  } 
-// for First & Last Name  
- 
-$(document).ready(function() {
-   $("#txtfname").keydown(function(event) {
-       validateName(event);
-    });
-    $("#txtlname").keydown(function(event) {
-       validateName(event);
-    });
-});
- 
-function validateName(event) {
-         // Allow: backspace, delete, tab, escape, and enter
-        if ( event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 27 || event.keyCode == 13 ||  
-             // Allow: home, end, left, right
-            (event.keyCode >= 35 && event.keyCode <= 39)) {
-                 // let it happen, don't do anything
-                 return;
-        }
-        else {
-            // Ensure that it is a alphabets and stop the keypress
-            if (event.shiftKey ||(event.keyCode < 65 || event.keyCode > 90) && (event.keyCode < 97 || event.keyCode > 123) && event.keyCode != 32)
-            {
-                event.preventDefault(); 
-            }   
-        }
-}
  
 // for phone number 
 
@@ -527,3 +485,16 @@ $(document).ready(function() {
     });
 });
  
+
+/* forgotten password */
+
+$(document).ready(function() {
+	$('#btnSubmitEmail').click(function(){
+		var email = $('#txtForgotEmail').val();
+		$.post('/getLink',{email : email}, function(data){
+			var newdata = jQuery.parseJSON(data);
+			$('#uniqueId').val(newdata['link']);
+			$('#newPassword').css('display' , 'block');
+		});
+	});
+});

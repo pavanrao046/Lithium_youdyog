@@ -1,27 +1,26 @@
-<div class="pull-center wrapper">
+<div class="wrapper">
+
 <legend> Register </legend>
-<a href="/login" style="float:right;">Login  </a> 
 
 <?= $this->form->create() ?>
 
 
-<?= $this->form->field('first name',array('id' => 'txtfname','placeholder'=>'', 'autocomplete' => 'off')); ?>
+<?= $this->form->field('first_name',array('id' => 'txtfname','placeholder'=>'', 'autocomplete' => 'off')); ?>
 <div id="fnamealertBox" class="alert alert-danger" style="display: none;"></div>
 
-<?= $this->form->field('last name',array('id' => 'txtlname' ,'placeholder'=>'' , 'autocomplete' => 'off')); ?>
+<?= $this->form->field('last_name',array('id' => 'txtlname' ,'placeholder'=>'' , 'autocomplete' => 'off')); ?>
 <div id="lnamealertBox" class="alert alert-danger" style="display: none;"></div>
 
-<?= $this->form->field('email',array('type' =>'email' ,'id' => 'txtemail' , 'autocomplete' => 'off')); ?>
+<?= $this->form->field('email',array('type' =>'email' ,'id' => 'txtemail' , 'autocomplete' => 'off','value'=>$_SESSION['tempuserEmail'],'readonly'=>'readonly')); ?>
 <div id="emailalertBox" class="alert alert-danger" style="display: none;"></div>
 
-<?= $this->form->field('password',array('type' => 'password','placeholder'=>'Minimum 6 characters long','id' => 'password', 'name'=>'password', 'onCopy' => 'return false', 'onPaste' => 'return false',
+<?= $this->form->field('password',array('type' => 'password','placeholder'=>'Minimum 6 Characters','id' => 'password', 'name'=>'password', 'onCopy' => 'return false', 'onPaste' => 'return false',
 'onblur'=>'passwordStrength(this.value,document.getElementById("strendth"),document.getElementById("passError"))')); ?>
  <span id="passError"></span><span id="strendth"></span>
 
 <div id="passwordalertBox" class="alert alert-danger" style="display: none;"></div>
-
-
-<?= $this->form->field('confirm password',array('type' => 'password','id' => 'txtcpass', 'onblur'=>'comp_pass();', 'onCopy' => 'return false', 'onPaste' => 'return false')); ?>
+<label >Confirm Password</label>
+<input type="password" id="txtcpass" placeholder="Confirm Password" onblur="comp_pass();" onCopy="return false" onPaste="return false"/>
 <div id="cpasswordalertBox" class="alert alert-danger" style="display: none;"></div>
 
 <?= $this->form->field('contact no',array('id' => 'txtcontactno', 'autocomplete' => 'off')); ?>
@@ -33,12 +32,14 @@
 <?/*= $this->form->field('status',array('id' => 'txtstatus')); */?>
 
 <?php /*
+<?= $this->form->field('confirm password',array('type' => 'password','id' => 'txtcpass', 'onblur'=>'comp_pass();', 'onCopy' => 'return false', 'onPaste' => 'return false')); ?>
+
 $publickey = "6Lcb8tsSAAAAAIld1G9c4CS4nkPzgkqxpghlTrqw"; // you got this from the signup page
 echo recaptcha_get_html($publickey);
 */?>
 
 
-<br>
+
 
 <p><?= $this->form->button('Register',array('class' => 'btn btn-primary','onclick' => 'if(validateRegisterPage())
 {
@@ -53,4 +54,4 @@ else{
 
 <div id="alertBox" class="alert alert-danger" style="display: none;"></div>
 <?= $this->form->end(); ?>
-</div> <!-- end wrapper -->
+</div>

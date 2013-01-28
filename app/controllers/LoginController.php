@@ -32,6 +32,7 @@ class LoginController extends \lithium\action\Controller
 				{	
 					$_SESSION['loginFailed'] = 0;
 					$_SESSION['loginSuccess'] = 1;
+					$_SESSION['email'] = $data['email'];
 					$myId = Users::getUsers('all',array('conditions' => array('email' => $data['email']), 'fields' => array('_id')));
 					$loggedId = $myId[0]['_id'];
 					$_SESSION['loggedInUserId'] = $loggedId;		
