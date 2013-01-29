@@ -33,8 +33,8 @@ if(isset($_SESSION['loginFailed']) && $_SESSION['loginFailed'] == 1)
 else{
 	return true;
 }
-')); ?></p>
-<a href="/register">Register</a> <a href="/forgot" style="margin-left : 20px;">Forgot Password</a>
+')); ?> <a href="/forgot" style="margin-left : 20px;">Forgot Password</a></p>
+
 
 <div id="alertBox" class="alert alert-danger" style="display: none;"></div>
 <?= $this->form->end(); ?>

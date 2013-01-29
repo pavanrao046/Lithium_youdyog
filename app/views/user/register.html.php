@@ -1,9 +1,16 @@
 <div class="wrapper">
 
 <legend> Register </legend>
-<?php if($_SESSION['tempuserEmail'] == null || $_SESSION['tempUserEmail'] == ""){ ?>
-<div id="alertBox" class="wrapper alert-danger" style="display: block"><center><strong> Oops! </strong> The URL seems to be broken.</center></div>
-<?php } 
+<?php if($_SESSION['tempuserEmail'] == null || $_SESSION['tempuserEmail'] == ""){ 
+	if($isRegistered == '1')
+	{?>
+		<div id="alertBox" class="wrapper well alert-success" style="display: block"><center> You are now registered with youdyog.in. Please <strong> <a href="/login"> login </a> to your account. </strong></center></div>
+	
+<?php }else {
+	?>
+	<div id="alertBox" class="wrapper alert-danger" style="display: block"><center><strong> Oops! </strong> The URL seems to be broken.</center></div>
+<?php }
+	} 
 else {
 ?>
 

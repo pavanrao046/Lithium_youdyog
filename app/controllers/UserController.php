@@ -20,7 +20,8 @@ class UserController extends \lithium\action\Controller {
 			Users::update($this->request->data,$condition);
 			unset($_SESSION['tempuserEmail']);
 			unset($_SESSION['tempuserId']);
-			return $this->redirect('User::success');
+			$isRegistered = '1';
+			return compact('isRegistered');
 		}
 		else
 		{

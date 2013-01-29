@@ -12,6 +12,12 @@ class LoginController extends \lithium\action\Controller
 
 	public function login()
 	{	
+			if($_SESSION['loginSuccess'] == 1 && $_SESSION['role'] == "admin")
+				return $this->redirect('Admin::manage');
+			else if($_SESSION['loginSuccess'] == 1 && $_SESSION['role'] == "member")
+				return $this->redirect('User::index');
+			else
+			{
 			$data = $this->request->data;
 
 			 if ($data && $data['email'] != "" && $data['password'] != "")
@@ -51,6 +57,8 @@ class LoginController extends \lithium\action\Controller
 					$_SESSION['loginFailed'] = 1;
 					
 				}
+			}
+			
 			}
 		}
 
