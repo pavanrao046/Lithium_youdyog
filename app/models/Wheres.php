@@ -21,6 +21,13 @@ class Wheres extends \lithium\data\Model {
 		$result = Wheres::update($query,$condition, array('atomic' => false));		
 		return $result;	
 	}
+	
+	/* for deleting a where record */
+	public function deleteWhere($condition){
+		$result = Wheres::remove($condition);
+		return $result;
+	}
+	
 
 }
  

@@ -21,6 +21,12 @@ class Hows extends \lithium\data\Model {
 		$result = Hows::update($query,$condition, array('atomic' => false));		
 		return $result;	
 	}
+	
+	/* for deleting a how record */
+	public function deleteHow($condition){
+		$result = Hows::remove($condition);
+		return $result;
+	}
 
 }
  

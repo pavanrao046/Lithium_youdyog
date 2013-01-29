@@ -72,6 +72,6 @@
 	</div>
 </body>
 <footer><center><hr style="width : 100%"> &COPY; Copyright. 2013. www.youdyog.in. All Rights Reserved. </center></footer>
-<?php echo $this->html->script(array('jquery','admin','youdyog','bootstrap-dropdown','bootstrap-collapse', 'bootstrap-modal')); ?>
+<?php echo $this->html->script(array('jquery','admin','youdyog','bootstrap-dropdown','bootstrap-tab','bootstrap-collapse', 'bootstrap-modal')); ?>
 	
 </html>

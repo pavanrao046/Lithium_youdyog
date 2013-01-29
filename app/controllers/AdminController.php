@@ -4,6 +4,10 @@ namespace app\controllers;
 session_start();
 
 use app\models\Users;
+use app\models\Hows;
+use app\models\Wheres;
+use app\models\Whichs;
+use app\models\Whats;
 
 use lithium\security\Auth;
 use lithium\g11n\Message;
@@ -54,6 +58,60 @@ class AdminController extends \lithium\action\Controller
 		if($_SESSION['loginSuccess'] != 1)
 			return $this->redirect('Login::login');
 				
+	}
+	
+	public function addInterests(){
+		
+	}
+	
+	public function getHows(){
+		$hows = Hows::getHows('all',null);
+		$howsArray = array();
+		
+		foreach($hows as $how)
+		{
+			array_push($howsArray,array('name' => $how['name'],'id' => $how['_id']));
+		}
+		
+		return json_encode($howsArray);
+	}
+	
+	public function getWheres(){
+		$wheres = Wheres::getWheres('all',null);
+		$wheresArray = array();
+		
+		foreach($wheres as $where)
+		{
+			array_push($wheresArray,array('name' => $where['name'],'id' => $where['_id']));
+		}
+		
+		return json_encode($wheresArray);
+	}
+	
+	public function deleteHow(){
+		$howId = $_POST['id'];
+		$result = Hows::deleteHow(array('_id' => new \MongoId($howId)));
+		if($result)
+		{
+			return '1';
+		} 
+		else
+		{
+			return '0';
+		}
+	}
+	
+	public function deleteWhere(){
+		$whereId = $_POST['id'];
+		$result = Wheres::deleteWhere(array('_id' => new \MongoId($whereId)));
+		if($result)
+		{
+			return '1';
+		} 
+		else
+		{
+			return '0';
+		}
 	}
 }
 
