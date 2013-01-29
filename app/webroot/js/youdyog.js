@@ -539,7 +539,7 @@ $(document).ready(function() {
 			}
 			for(var i=0;i<newdata.length;i++)
 			{
-				$('#managehowscontent').append('<div class="listDiv"> '+newdata[i]['name']+'<button title="Delete" style="margin-left : 20px;" class="btn pull-right deleteHow" id="'+newdata[i]['id']['$id']+'"> <i class="icon-trash"> </i> </button><button title="Edit" class="btn pull-right editHow" id="'+newdata[i]['id']['$id']+'"> <i class="icon-edit"> </i> </button>');
+				$('#managehowscontent').append('<div class="listDiv"> '+newdata[i]['name']+'<button title="Delete" style="margin-left : 20px;" class="btn pull-right deleteHow" id="'+newdata[i]['id']['$id']+'"> <i class="icon-trash"> </i> </button><button title="Edit" data-name="'+newdata[i]['name']+'"  class="btn pull-right editHow" id="'+newdata[i]['id']['$id']+'"> <i class="icon-edit"> </i> </button>');
 			}
 		});
 	});
@@ -555,7 +555,7 @@ $(document).ready(function() {
 			}
 			for(var i=0;i<newdata.length;i++)
 			{
-				$('#managewherescontent').append('<div class="listDiv"> '+newdata[i]['name']+'<button title="Delete" style="margin-left : 20px;" class="btn pull-right deleteWhere" id="'+newdata[i]['id']['$id']+'"> <i class="icon-trash"> </i> </button><button title="Edit" class="btn pull-right editWhere" id="'+newdata[i]['id']['$id']+'"> <i class="icon-edit"> </i> </button>');
+				$('#managewherescontent').append('<div class="listDiv"> '+newdata[i]['name']+'<button title="Delete" style="margin-left : 20px;" class="btn pull-right deleteWhere" id="'+newdata[i]['id']['$id']+'"> <i class="icon-trash"> </i> </button><button title="Edit" data-name="'+newdata[i]['name']+'" class="btn pull-right editWhere" id="'+newdata[i]['id']['$id']+'"> <i class="icon-edit"> </i> </button>');
 			}
 		});
 	});
@@ -575,4 +575,263 @@ $(document).ready(function() {
 	});
 
 
+/* create new how | on click of + button in manage hows tab */
+	$('#frmNewHow').submit(function(){
+		var name = $('#txtHowName').val();
+		if(name == "")
+		{
+			$('#alertCreatHow').html('<strong> Oops! </strong> Did you forget to enter the name?');
+			$('#alertCreateHow').css('display','block');
+			$('#alertCreateHow').attr('class','alert alert-danger');
+			$('#alertCreateHow').hide().fadeIn(300);
+			return false;
+		}
+		else
+		{
+			$.post('/admin/createHow',{name : name}, function(data){
+				if(data == '1')
+				{
+					location.reload();
+				}
+				else
+				{
+					$('#alertCreatHow').html('<strong> Oops! </strong> Something went wrong while creating How. Please try again later.');
+					$('#alertCreateHow').css('display','block');
+					$('#alertCreateHow').attr('class','alert alert-danger');
+					$('#alertCreateHow').hide().fadeIn(300);
+	
+				}
+			});
+		}
+	});
+	
+	$('#createHowSubmit').click(function(){
+		var name = $('#txtHowName').val();
+		if(name == "")
+		{
+			$('#alertCreatHow').html('<strong> Oops! </strong> Did you forget to enter the name?');
+			$('#alertCreateHow').attr('class','alert alert-danger');
+			$('#alertCreateHow').css('display','block');
+			$('#alertCreateHow').hide().fadeIn(300);
+			return false;
+		}
+		else
+		{
+			$.post('/admin/createHow',{name : name}, function(data){
+				if(data == '1')
+				{
+					location.reload();
+				}
+				else
+				{
+					$('#alertCreatHow').html('<strong> Oops! </strong> Something went wrong while creating How. Please try again later.');
+					$('#alertCreateHow').attr('style','display : block');
+					$('#alertCreateHow').attr('class','alert alert-danger');
+					$('#alertCreateHow').hide().fadeIn(500);
+	
+				}
+			});
+		}
+		return false;
+	});
+	
+	
+	/* create new where | on click of + button in manage wheres tab */
+	$('#frmNewWhere').submit(function(){
+		var name = $('#txtWhereName').val();
+		if(name == "")
+		{
+			$('#alertCreatWhere').html('<strong> Oops! </strong> Did you forget to enter the name?');
+			$('#alertCreateWhere').css('display','block');
+			$('#alertCreateWhere').attr('class','alert alert-danger');
+			$('#alertCreateWhere').hide().fadeIn(300);
+			return false;
+		}
+		else
+		{
+			$.post('/admin/createWhere',{name : name}, function(data){
+				if(data == '1')
+				{
+					location.reload();
+				}
+				else
+				{
+					$('#alertCreatWhere').html('<strong> Oops! </strong> Something went wrong while creating Where. Please try again later.');
+					$('#alertCreateWhere').css('display','block');
+					$('#alertCreateWhere').attr('class','alert alert-danger');
+					$('#alertCreateWhere').hide().fadeIn(300);
+	
+				}
+			});
+		}
+	});
+	
+	$('#createWhereSubmit').click(function(){
+		var name = $('#txtWhereName').val();
+		if(name == "")
+		{
+			$('#alertCreatWhere').html('<strong> Oops! </strong> Did you forget to enter the name?');
+			$('#alertCreateWhere').attr('class','alert alert-danger');
+			$('#alertCreateWhere').css('display','block');
+			$('#alertCreateWhere').hide().fadeIn(300);
+			return false;
+		}
+		else
+		{
+			$.post('/admin/createWhere',{name : name}, function(data){
+				if(data == '1')
+				{
+					location.reload();
+				}
+				else
+				{
+					$('#alertCreatWhere').html('<strong> Oops! </strong> Something went wrong while creating Where. Please try again later.');
+					$('#alertCreateWhere').attr('style','display : block');
+					$('#alertCreateWhere').attr('class','alert alert-danger');
+					$('#alertCreateWhere').hide().fadeIn(500);
+	
+				}
+			});
+		}
+		return false;
+	});
+	
+/* on click of edit how button in manage interests page */	
+	$('#managehowscontent').on('click', '.editHow', function(){
+		$('#txtEditHowName').val($(this).attr('data-name'));
+		$('#editId').val($(this).attr('id'));
+		$('#editHowModal').modal('show');
+	
+	});
+	
+/* on click of edit where button in manage interests page */	
+	$('#managewherescontent').on('click', '.editWhere', function(){
+		$('#txtEditWhereName').val($(this).attr('data-name'));
+		$('#editId').val($(this).attr('id'));
+		$('#editWhereModal').modal('show');
+	
+	});
+	
+	/* on submit of edit how form */
+	$('#frmEditHow').submit(function(){
+		var name = $('#txtEditHowName').val();
+		if(name == "")
+		{
+			$('#alertEditHow').html('<strong> Oops! </strong> Did you forget to enter the name?');
+			$('#alertEditHow').css('display','block');
+			$('#alertEditHow').attr('class','alert alert-danger');
+			$('#alertEditHow').hide().fadeIn(300);
+			return false;
+		}
+		else
+		{
+			$.post('/admin/editHow',{name : name,id: $('#editId').val()}, function(data){
+				if(data == '1')
+				{
+					location.reload();
+				}
+				else
+				{
+					$('#alertEditHow').html('<strong> Oops! </strong> Something went wrong while Editing How. Please try again later.');
+					$('#alertEditHow').css('display','block');
+					$('#alertEditHow').attr('class','alert alert-danger');
+					$('#alertEditHow').hide().fadeIn(300);
+	
+				}
+			});
+		}
+	});
+	
+	$('#editHowSubmit').click(function(){
+		var name = $('#txtEditHowName').val();
+		if(name == "")
+		{
+			$('#alertEditHow').html('<strong> Oops! </strong> Did you forget to enter the name?');
+			$('#alertEditHow').attr('class','alert alert-danger');
+			$('#alertEditHow').css('display','block');
+			$('#alertEditHow').hide().fadeIn(300);
+			return false;
+		}
+		else
+		{
+			$.post('/admin/editHow',{name : name,id: $('#editId').val()}, function(data){
+				if(data == '1')
+				{
+					location.reload();
+				}
+				else
+				{
+					$('#alertEditHow').html('<strong> Oops! </strong> Something went wrong while editing How. Please try again later.');
+					$('#alertEditHow').attr('style','display : block');
+					$('#alertEditHow').attr('class','alert alert-danger');
+					$('#alertEditHow').hide().fadeIn(500);
+	
+				}
+			});
+		}
+		return false;
+	});
+	
+/* on submit of edit where form */
+	$('#frmEditWhere').submit(function(){
+		var name = $('#txtEditWhereName').val();
+		if(name == "")
+		{
+			$('#alertEditWhere').html('<strong> Oops! </strong> Did you forget to enter the name?');
+			$('#alertEditWhere').css('display','block');
+			$('#alertEditWhere').attr('class','alert alert-danger');
+			$('#alertEditWhere').hide().fadeIn(300);
+			return false;
+		}
+		else
+		{
+			$.post('/admin/editWhere',{name : name,id: $('#editId').val()}, function(data){
+				if(data == '1')
+				{
+					location.reload();
+				}
+				else
+				{
+					$('#alertEditWhere').html('<strong> Oops! </strong> Something went wrong while Editing Where. Please try again later.');
+					$('#alertEditWhere').css('display','block');
+					$('#alertEditWhere').attr('class','alert alert-danger');
+					$('#alertEditWhere').hide().fadeIn(300);
+	
+				}
+			});
+		}
+	});
+	
+	$('#editWhereSubmit').click(function(){
+		var name = $('#txtEditWhereName').val();
+		if(name == "")
+		{
+			$('#alertEditWhere').html('<strong> Oops! </strong> Did you forget to enter the name?');
+			$('#alertEditWhere').attr('class','alert alert-danger');
+			$('#alertEditWhere').css('display','block');
+			$('#alertEditWhere').hide().fadeIn(300);
+			return false;
+		}
+		else
+		{
+			$.post('/admin/editWhere',{name : name,id: $('#editId').val()}, function(data){
+				if(data == '1')
+				{
+					location.reload();
+				}
+				else
+				{
+					$('#alertEditWhere').html('<strong> Oops! </strong> Something went wrong while editing Where. Please try again later.');
+					$('#alertEditWhere').attr('style','display : block');
+					$('#alertEditWhere').attr('class','alert alert-danger');
+					$('#alertEditWhere').hide().fadeIn(500);
+	
+				}
+			});
+		}
+		return false;
+	});
+
 });
+
+

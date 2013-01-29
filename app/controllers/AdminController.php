@@ -113,6 +113,64 @@ class AdminController extends \lithium\action\Controller
 			return '0';
 		}
 	}
+	
+	public function createHow(){
+		$howName = $_POST['name'];
+		$result = Hows::create(array('name' => $howName))->save();
+		
+		if($result)
+		{
+			return '1';
+		} 
+		else
+		{
+			return '0';
+		}
+	}
+	
+	public function createWhere(){
+		$whereName = $_POST['name'];
+		$result = Wheres::create(array('name' => $whereName))->save();
+		
+		if($result)
+		{
+			return '1';
+		} 
+		else
+		{
+			return '0';
+		}
+	}
+	
+	public function editWhere(){
+		$whereName = $_POST['name'];
+		$id = $_POST['id'];
+		$result = Wheres::updateWhere(array('name' => $whereName),array('_id' => new \MongoId($id)));
+		
+		if($result)
+		{
+			return '1';
+		} 
+		else
+		{
+			return '0';
+		}
+	}
+	
+	public function editHow(){
+		$howName = $_POST['name'];
+		$id = $_POST['id'];
+		$result = Hows::updateHow(array('name' => $howName),array('_id' => new \MongoId($id)));
+		
+		if($result)
+		{
+			return '1';
+		} 
+		else
+		{
+			return '0';
+		}
+	}
 }
 
 
