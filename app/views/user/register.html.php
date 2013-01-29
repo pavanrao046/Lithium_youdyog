@@ -8,7 +8,7 @@
 	
 <?php }else {
 	?>
-	<div id="alertBox" class="wrapper alert-danger" style="display: block"><center><strong> Oops! </strong> The URL seems to be broken.</center></div>
+	<div id="alertBox" class="wrapper well alert-danger" style="display: block"><center><strong> Oops! </strong> The URL seems to be broken.</center></div>
 <?php }
 	} 
 else {

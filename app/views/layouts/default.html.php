@@ -63,7 +63,7 @@
               </div><!-- /navbar-inner -->
             </div>
 </header>
-</header>
+
 <body class="app">
 	<div id="container" class="container">
 		<div id="content">

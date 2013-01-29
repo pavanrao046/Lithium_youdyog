@@ -10,6 +10,7 @@ footer{
 	z-index : -1111;
 	top : 10%;
 	width : 100%;	
+	display : none;
 }
 
 
@@ -83,7 +84,14 @@ footer{
 /* style for table cells */
 
 td{
-	height : 20px !important;
+	height : 40px !important;
+	padding-left : 10px;
+	
+}
+
+th{
+	height : 40px !important;
+	width : 30%;
 }
 
 
@@ -95,4 +103,11 @@ td{
 
 #btnSearchGroup{
 	margin-top : 5px;
+}
+
+
+/* style for interests table in profile page */
+
+#tblInterests{
+	width : 100%;
 }
