@@ -91,12 +91,7 @@ td{
 
 th{
 	height : 40px !important;
-	width : 30%;
 }
-
-
-
-
 
 
 /* style for public groups page */
@@ -110,4 +105,8 @@ th{
 
 #tblInterests{
 	width : 100%;
+}
+
+#selectInterests div{
+	margin-right : 25px;
 }

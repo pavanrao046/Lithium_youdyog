@@ -3,6 +3,11 @@ namespace app\controllers;
 session_start();
 
 use app\models\Users;
+use app\models\Hows;
+use app\models\Whats;
+use app\models\Whichs;
+use app\models\Wheres;
+use app\models\Groups;
 
 use lithium\security\Auth;
 
@@ -38,6 +43,29 @@ class UserController extends \lithium\action\Controller {
 	{
 		if($_SESSION['loginSuccess'] != 1)
 			return $this->redirect('Login::login');
+		else
+		{
+			$interestsArray = array();
+			$hows = Hows::getHows('all',null);
+			$whats = Whats::getWhats('all',null);
+			$whichs = Whichs::getWhichs('all',null);
+			$wheres = Wheres::getWheres('all',null);
+			
+			array_push($interestsArray,$hows);
+			array_push($interestsArray,$whats);
+			array_push($interestsArray,$whichs);
+			array_push($interestsArray,$wheres);
+			return compact('interestsArray'); 
+		}
+	}
+	public function updateInterests(){	
+		$how = $_POST['how'];
+		$what = $_POST['what'];
+		$which = $_POST['which'];
+		$where = $_POST['where'];	
+		Users::update(array('$push' => array('interest_details' => $this->request->data)),array('_id' => new \MongoId($_SESSION['loggedInUserId'])));
+		$interests = Users::getUsers('all', array('conditions' => array('_id' => new \MongoId($_SESSION['loggedInUserId'])),'fields' => array('interest_details')));
+		return compact('interests');
 	}
 		
 	public function welcome() {

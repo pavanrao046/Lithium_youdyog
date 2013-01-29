@@ -1,0 +1,28 @@
+<?php 
+namespace app\models;
+use \lithium\data\connections;
+
+class Wheres extends \lithium\data\Model {
+
+	protected function _init() {
+        	$this->_render['negotiate'] = true;
+        	parent::_init();
+   }	
+	
+	/* for retrieval from wheres collection */
+	public function getWheres($type,$options){					
+		$wheres = Wheres::find($type);
+		return $wheres;
+	}
+	
+	
+	/* for updating wheres collection */
+	public function updateWhere($query, $condition){
+		$result = Wheres::update($query,$condition, array('atomic' => false));		
+		return $result;	
+	}
+
+}
+ 
+ 
+?>
