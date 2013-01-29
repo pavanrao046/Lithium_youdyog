@@ -6,8 +6,9 @@ a:active,a:hover{
 
 footer{
 	color : #888888;
-	position : absolute;
-	top : 90%;
+	position : relative;
+	z-index : -1111;
+	top : 10%;
 	width : 100%;	
 }
 
