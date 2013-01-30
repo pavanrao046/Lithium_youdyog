@@ -34,7 +34,7 @@ class AdminController extends \lithium\action\Controller
 			if($temp['email'] != null || $temp['email'] != "") 
 			{
 	
-					
+					var_dump($rolename);
 			  // $users = Users::first(array('conditions' => 'user_email'=>$temp['user_email']));
 			  $users = Users::first(array('conditions' => array('email'=>$temp['email'])));
 				if(isset($users) && $users['email']==$temp['email']) {

@@ -46,10 +46,10 @@
                       
                     </ul>
                   	
-                  	<ul class="nav pull-right">
+                  	<ul class="nav pull-right"> <li style="margin-top: 10px"><?php  echo ($_SESSION['email']);?></li>
                     <li id="logoutNav" class="navItem"><a href="/logout" style="float:right;"> Logout </a></li>
                     </ul>
-                    <div class="navbar-search pull-right">
+                    <div class="navbar-search pull-right" style="display:none">
                     	<form id="frmSearchUser" action = "" method = "post">
                    			<input type = "text" id = "txtSearchName" class = "pull-right search-query span2" placeholder = "Search User" style = "margin-top:0.5%;" />
 							<div class="icon-search"></div>

@@ -835,3 +835,47 @@ $(document).ready(function() {
 });
 
 
+/* for Participate pages*/
+
+
+function showdiv(id)
+{
+      document.getElementById(id).style.display = "block";
+      
+}
+function hidediv(id)
+{
+	document.getElementById(id).style.display ="none";
+} 
+
+
+// for getting current role
+function getCurrentRole(){
+	if (document.getElementById("part_no").checked)
+	{
+		
+		var role = document.getElementById("part_no").value;
+		alert("member");
+		
+	}
+ 	else	if(document.getElementById("part_yes").checked ) 
+		{	
+					if(document.getElementById("par_yes").checked)					
+					//document.getElementById("par_yes").value;					
+					alert("Partner");		
+		}		
+			else
+			
+	
+				//document.getElementById("par_no").checked
+				//document.getElelmentById("par_no").value;
+				alert("PRovider");		
+}
+
+//
+$(document).ready(function() { 
+  if($("input:radio[name='radiogroup'][value='Yes']").is(":checked")) { 
+     alert($('input[name=Yes]:checked').val()); 
+  } 
+	
+});

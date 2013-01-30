@@ -4,19 +4,14 @@ a:active,a:hover{
 	text-decoration : none;
 }
 
+
 footer{
 	color : #888888;
-	position : relative;
-	z-index : -1111;
-	top : 10%;
+	position : float;
 	width : 100%;	
-	display : none;
+	margin-top : 17%; 
 }
 
-.inlineList{
-	margin-left : 20px;
-	float : left;
-	}
 
 #searchResults{
 	border : 1px solid;
@@ -33,6 +28,26 @@ footer{
 }
 #getFriends{
 	margin-top : 20px;
+}
+
+#wrapperLogin{
+	border : 1px solid;
+	border-color : black;
+	padding : 10px;
+	border-radius : 24px;
+	margin-left : auto;
+	margin-right : auto;
+	width : 400px;
+}
+
+#wrapperLoginn{
+	border : 1px solid;
+	border-color : black;
+	padding : 10px;
+	border-radius : 24px;
+	margin-left : auto;
+	margin-right : auto;
+	width : 500px;
 }
 
 .wrapper{
@@ -87,34 +102,17 @@ footer{
 
 /* style for table cells */
 
-table{
-	width : 100%;
-	}
-
 td{
-	height : 40px !important;
-	padding-left : 10px;
-	
+	height : 20px !important;
 }
 
-th{
-	height : 40px !important;
-}
+
+
+
 
 
 /* style for public groups page */
 
 #btnSearchGroup{
 	margin-top : 5px;
-}
-
-
-/* style for interests table in profile page */
-
-#tblInterests{
-	width : 100%;
-}
-
-#selectInterests div{
-	margin-right : 25px;
 }

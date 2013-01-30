@@ -13,7 +13,7 @@ class Constants {
    								self::ROLE_PROVIDER => "Provider");
 
 	const STATUS_DELETED = 0;
-	const STATUS_APPROVED = 1;
+	const STATUS_ACTIVE = 1;
 	const STATUS_UNAPPROVED = 2;
 	public static $status = array(self::STATUS_DELETED => "Deleted",
 											self::STATUS_APPROVED => "Approved",

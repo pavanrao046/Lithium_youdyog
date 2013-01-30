@@ -3,6 +3,8 @@
 namespace app\controllers;
 session_start();
 
+use app\controllers\Constants;
+
 use app\models\Users;
 use lithium\security\Auth;
 use lithium\stoarge\Session;
@@ -12,12 +14,6 @@ class LoginController extends \lithium\action\Controller
 
 	public function login()
 	{	
-			if($_SESSION['loginSuccess'] == 1 && $_SESSION['role'] == "admin")
-				return $this->redirect('Admin::manage');
-			else if($_SESSION['loginSuccess'] == 1 && $_SESSION['role'] == "member")
-				return $this->redirect('User::index');
-			else
-			{
 			$data = $this->request->data;
 
 			 if ($data && $data['email'] != "" && $data['password'] != "")
@@ -39,16 +35,23 @@ class LoginController extends \lithium\action\Controller
 					$_SESSION['loginFailed'] = 0;
 					$_SESSION['loginSuccess'] = 1;
 					$_SESSION['email'] = $data['email'];
-					$myId = Users::getUsers('all',array('conditions' => array('email' => $data['email']), 'fields' => array('_id')));
+					$myId = Users::getUsers('all',array('conditions' => array('email' => $data['email']), 'fields' => array('_id','roles')));
 					$loggedId = $myId[0]['_id'];
 					$_SESSION['loggedInUserId'] = $loggedId;		
 					
-					if($data['email'] == "admin@youdyog.in") {
+					if($data['email'] == "admin@youdyog.in") 
+					{
+						//$rolename = Constants::$roles[Constants::ROLE_ADMIN];
 						$_SESSION['role'] = "admin";
 						return $this->redirect('Admin::manage');
 					}
 					else {
 						$_SESSION['role'] = "member";
+						$roless = $myId[0]['roles'][0]['value'];
+var_dump(Constants::$roles[Constants::ROLE_ADMIN]);
+var_dump(Constants::ROLE_ADMIN);
+						$_SESSION['userroles'] = $roless;
+						
 						return $this->redirect('User::index');
 					}
 				}			
@@ -57,8 +60,6 @@ class LoginController extends \lithium\action\Controller
 					$_SESSION['loginFailed'] = 1;
 					
 				}
-			}
-			
 			}
 		}
 

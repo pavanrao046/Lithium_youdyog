@@ -1,23 +1,20 @@
-<div class="wrapper">
-
-<legend> Register </legend>
-<?php if($_SESSION['tempuserEmail'] == null || $_SESSION['tempuserEmail'] == ""){ 
-	if($isRegistered == '1')
-	{?>
-		<div id="alertBox" class="wrapper well alert-success" style="display: block"><center> You are now registered with youdyog.in. Please <strong> <a href="/login"> login </a> to your account. </strong></center></div>
-	
-<?php }else {
-	?>
+<div class="wrapper" id="wrapperLogin" style="align:center; margin-top:10px">
+<legend> <div style="color : #58ACFA !important;">Register</div></legend>
+<?php if($_SESSION['tempuserEmail'] == null || $_SESSION['tempuserEmail'] == ""){ ?>
+<?php 
+if($isRegistered == '1')
+{?>
+   <div id="alertBox" class="wrapper well alert-success" style="display: block"><center> Thank you for Registering with Youdyog. Please <strong> <a href="/login">Click here</a></strong> to continue.</center></div>
+<?php } else {?>
 	<div id="alertBox" class="wrapper well alert-danger" style="display: block"><center><strong> Oops! </strong> The URL seems to be broken.</center></div>
-<?php }
-	} 
-else {
+<?php }} 
+else  {
 ?>
 
 <?= $this->form->create() ?>
 
 
-<?= $this->form->field('first_name',array('id' => 'txtfname','placeholder'=>'', 'autocomplete' => 'off')); ?>
+<?= $this->form->field('first_name',array('class'=>'input-xlarge','id' => 'txtfname','placeholder'=>'', 'autocomplete' => 'off')); ?>
 <div id="fnamealertBox" class="alert alert-danger" style="display: none;"></div>
 
 <?= $this->form->field('last_name',array('id' => 'txtlname' ,'placeholder'=>'' , 'autocomplete' => 'off')); ?>
@@ -41,18 +38,6 @@ else {
 <?= $this->form->field('location',array('id' => 'txtlocation', 'autocomplete' => 'off')); ?>
 <div id="locationalertBox" class="alert alert-danger" style="display: none;"></div>
 
-<?/*= $this->form->field('status',array('id' => 'txtstatus')); */?>
-
-<?php /*
-<?= $this->form->field('confirm password',array('type' => 'password','id' => 'txtcpass', 'onblur'=>'comp_pass();', 'onCopy' => 'return false', 'onPaste' => 'return false')); ?>
-
-$publickey = "6Lcb8tsSAAAAAIld1G9c4CS4nkPzgkqxpghlTrqw"; // you got this from the signup page
-echo recaptcha_get_html($publickey);
-*/?>
-
-
-
-
 <p><?= $this->form->button('Register',array('class' => 'btn btn-primary','onclick' => 'if(validateRegisterPage())
 {
 	return true;
@@ -62,9 +47,8 @@ else{
 }
 ')); ?></p>
 
-
-
 <div id="alertBox" class="alert alert-danger" style="display: none;"></div>
 <?= $this->form->end(); ?>
 <?php } ?>
+
 </div>

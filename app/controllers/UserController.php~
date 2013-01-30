@@ -77,7 +77,7 @@ class UserController extends \lithium\action\Controller {
 	public function participate() 
 	{
 		
-		
+		var_dump(role);
 		echo ($_SESSION['userroles']);
 			//$data= $_SESSION['role'];
 		$role = $_POST['role'];		

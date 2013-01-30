@@ -24,10 +24,10 @@ No</label>
 
 <div id="container3" style="display:none" >
 <label style=" margin-left:450px; margin-top:30px; font-family:Verdana; font-weight:bold;">
-<?= $this->form->radio('participate',array('name' => 'radiogroup','id'=>'par_yes','value'=>'Yes','onclick'=>'showdiv("button"); getCurrentRole()')); ?>
+<?= $this->form->radio('participate',array('name' => 'radiogroup','id'=>'par_yes','value'=>'Yes','onclick'=>'showdiv("button");')); ?>
  Partner</label>
 </br><label style=" margin-left:600px; margin-top:-45px; font-family:Verdana; font-weight:bold;">
-<?= $this->form->radio('participate',array('name' => 'radiogroup','id'=>'par_no','value'=>'No','onclick'=>'showdiv("button"); getCurrentRole()')); ?>
+<?= $this->form->radio('participate',array('name' => 'radiogroup','id'=>'par_no','value'=>'No','onclick'=>'showdiv("button");')); ?>
  Provider</label>
 </div>
 </br>
