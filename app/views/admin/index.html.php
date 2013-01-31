@@ -1,4 +1,8 @@
-<?php session_start(); ?>
+<?php 
+if (!isset($_SESSION)) {
+	session_start(); 
+}
+?>
 <h3  style=" position:absolute; top:30px; left:450px;"> List Of Users Registered  </h3>  
 <?php echo 'role:'. $_SESSION['role']; ?>
 	<p>

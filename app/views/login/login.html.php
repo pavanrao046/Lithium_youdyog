@@ -3,9 +3,10 @@
 <?= $this->form->create(null,array('action'=>'/','class'=>'form-horizontal')); ?>
 
 
+
 <div class="control-group" style="margin-left:-50px">
 <label class="control-label" for="inputEmail" style="margin-right:10px">Email</label>
-<?= $this->form->email('email',array('id' => 'txtemail','class'=>'input-large','autocomplete' => 'off')); ?>
+<?= $this->form->email('email',array('id' =>'txtemail','class'=>'input-large','autocomplete' => 'off')); ?>
 </div>
 <div class="control-group" style="margin-left:-50px">
 <label class="control-label" for="inputEmail" style="margin-right:10px">Password</label>
@@ -25,7 +26,10 @@ else{
 <div id="alertBox" class="alert alert-danger" style="display: none;"></div>
 <center>
 <?php 
-session_start();
+if (!isset($_SESSION)) {
+	session_start(); 
+}
+
 use lithium\storage\Session; 
 if(isset($_SESSION['loginFailed']) && $_SESSION['loginFailed'] == 1)
 {

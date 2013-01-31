@@ -1,5 +1,4 @@
-#Fri Jan 25 13:45:17 IST 2013
 eclipse.preferences.version=1
-include_path=0;/Bahumat\u00050;/Bahumat/app\u00051;/usr/share/nginx/html/lithium/libraries/lithium
+include_path=0;/Lithium\u00050;/Lithium/app\u00051;/usr/share/nginx/www/lithium/libraries/lithium
 phpVersion=php5.3
 use_asp_tags_as_php=false

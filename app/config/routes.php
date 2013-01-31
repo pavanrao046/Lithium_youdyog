@@ -90,14 +90,6 @@ Router::connect('/updatePassword', 'User::updatePassword');
 
 // routes for admin control for interests management
 Router::connect('/admin/managecategories','Admin::addInterests');
-Router::connect('/admin/getHows','Admin::getHows');
-Router::connect('/admin/getWheres','Admin::getWheres');
-Router::connect('/admin/deleteHow','Admin::deleteHow');
-Router::connect('/admin/deleteWhere','Admin::deleteWhere');
-Router::connect('/admin/createHow','Admin::createHow');
-Router::connect('/admin/createWhere','Admin::createWhere');
-Router::connect('/admin/editHow','Admin::editHow');
-Router::connect('/admin/editWhere','Admin::editWhere');
 
 /**
  * Connect the rest of `PagesController`'s URLs. This will route URLs like `/pages/about` to

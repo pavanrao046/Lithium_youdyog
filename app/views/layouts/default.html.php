@@ -10,7 +10,7 @@
 <html>
 <head>
 	<?php echo $this->html->charset();?>
-	<title>Application &gt; <?php echo $this->title(); ?></title>
+	<title>Youdyog<?php echo $this->title(); ?></title>
 	<?php echo $this->html->style(array('debug','bootstrap', 'style', 'bootstrap-responsive')); ?>
 	<?php echo $this->html->link('Icon', null, array('type' => 'icon')); ?>
 </head>

@@ -30,7 +30,7 @@
 <div id="alertBox" class="wrapper well alert-danger" style="display: block"><center> Error Login <?=$msg?></center></div>
    
 <?php } else {?>
-	<div id="alertBox" class="wrapper well alert-success" style="display: block"><center> Success: <?=$random ?> to continue.</center></div>
+	<div id="alertBox" class="wrapper well alert-success" style="display: block"><center> Success. Registration id for user: <?=$random ?>.</center></div>
 <?php 
 	  }
   }
